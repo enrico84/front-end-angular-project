@@ -1,0 +1,28 @@
+<body>
+  <h1>{{title}}</h1>
+  <h3>{{subtitle}}</h3>
+
+  <!-- Componente di Navigation-bar -->
+  <app-navbar></app-navbar>
+  <br/><br/>
+  <!-- 3° Navigazione tra pagine con il RouterModule -->
+  <router-outlet></router-outlet>
+
+  <!------------------------------------------------------------------------->
+  <!-- 2° Navigazione tra pagine implementata senza mantenere lo stato -->
+  <!--
+  <button class="btn" (click) = "activeSection = 'homepage'">homepage</button>
+  <button class="btn" (click) = "activeSection = 'contacts'">contacts</button>
+  <button class="btn" (click) = "activeSection = 'users'">users</button> 
+  -->
+  <!------------------------------------------------------------------------->
+  <!-- 1° Navigazione tra pagine semplice implementata senza il RouterModule -->
+    <!--
+    <div [ngSwitch] = "activeSection">
+      <app-homepage *ngSwitchCase="'homepage'"></app-homepage>
+      <app-contacts *ngSwitchCase="'contacts'"></app-contacts>
+      <app-users *ngSwitchCase="'users'"> </app-users>
+    </div>
+  -->
+  <!------------------------------------------------------------------------->
+</body>

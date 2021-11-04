@@ -1,0 +1,58 @@
+<!--CONTENT-->
+<div class="wrapper three-cols">
+    <!--SIDEBAR-->
+    <app-card title="Search" customCls="side-bar" [isScrollable]="true">
+      <app-hotel-form [city]="city" (searchHotels)="searchHotels($event)">
+      </app-hotel-form>
+      <app-separator></app-separator>
+       <!-- 
+         CON (setActive) CATTURO L'EVENTO "$event" CON DENTRO UN OGGETTO "hotel" 
+         EMESSO DAL CHILD <app-hotel-list> PASSANDOLO POI AL METODO del "SearchComponent"
+         "setActiveHotel($event)"
+        -->
+      <app-hotel-list
+        [hotels]="hotels"
+        [hotelActive]="hotelActive"
+        [city]="city"
+        (setActive) = "setActiveHotel($event)">
+      </app-hotel-list>
+    </app-card>
+    
+    <!--MAP-->
+    <app-card customCls="map" [contentPadding]="false">
+      <app-gmap [hotelActive]="hotelActive"></app-gmap>
+    </app-card>
+
+    <!--INFO BOX-->
+    <app-card [isCenteredContent]="true">    
+        <!--<img src="https://picsum.photos/400/200/?image=12" width="100%" height="200">-->
+        <app-rates [hotelActive]="hotelActive"></app-rates>
+        <app-separator></app-separator>
+        <app-stars [stars]="hotelActive?.stars"></app-stars>
+        <br>
+        <!-- 
+           CON (addToReservation) CATTURO L'EVENTO "$event" CON DENTRO UN OGGETTO "Room" 
+           EMESSO DAL CHILD <app-reservations> PASSANDOLO POI AL METODO del "SearchComponent" 
+           "addToCart($event, hotelActive)"
+          -->
+        <app-reservations [hotelActive]="hotelActive" (addToReservation)="addToCart($event, hotelActive)">
+        </app-reservations> 
+    </app-card>   
+    
+    <!--IMAGE GALLERY-->
+    <app-card customCls="gallery" [isScrollable]="true">
+        <app-image-gallery [activeImage]="activeImage" [hotelActive]="hotelActive">
+        </app-image-gallery>
+    </app-card>
+    
+    <!--SERVICES-->
+    <app-card customCls="services" title="Services" [isScrollable]="true">
+      <app-services [services]="hotelActive?.services"></app-services>
+    </app-card>
+
+    <!--CONTACT FORM-->
+    <app-card customCls="contact" title="Contacts">
+      <app-contact-form (email)="sendEmail($event)"></app-contact-form>
+    </app-card>
+
+  </div>

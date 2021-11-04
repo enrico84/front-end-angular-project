@@ -1,0 +1,36 @@
+a {
+    text-transform: uppercase;
+    margin-right: 5px;
+    background: gainsboro;
+    border-radius: 4px;
+    padding: 5px 15px;
+    color: black;
+    font-size: 80%;
+    display: inline-block;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+a.hover {
+    background: #4CAF50; /* Green */
+    opacity: 0.5;
+}
+
+a.active {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.navbar-container {
+    background: whitesmoke;
+    width: 100%;
+    padding: 20px;
+}
+
+.navbar-container.light {
+    background: whitesmoke;
+}
+
+.navbar-container.dark {
+    background: rgb(66, 66, 66);
+}

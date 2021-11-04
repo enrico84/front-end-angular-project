@@ -1,0 +1,82 @@
+<body>
+    <h3>{{usersService.title}}</h3>
+    <h4>{{usersService.subtitle}}</h4>
+  
+    <!-- <h2>Users: {{users?.length}}</h2> 1° approccio-->
+    <h2 *ngIf='usersService.users'>Users: {{usersService.users?.length || '-'}}</h2> <!-- 2° approccio -->
+  
+    <!-- User selezionato: <pre>{{selectedUser | json}}</pre> Stampa tutto il json User--> 
+    <pre>User selezionato: {{usersService.selectedUser?.name}}</pre>
+  
+    <pre *ngIf = "usersService.error" class="invalid">Errore</pre>
+  
+    <!-- #f è una Template-reference-variable (instanza) associata al Form-->
+    <!-- Con "ngModel" recupero i valori inseriti nella form e inviati al metodo formSubmit(NgForm) -->
+    <form (submit)= "usersService.formSubmit(f)" #f="ngForm">
+      
+      <!-- 
+        [ngModel] con le quadre accetta un'espressione(viene messo in binding con la proprietà), 
+        mentre ngModel accetta altre cose come una stringa 
+      -->
+      <select 
+        [ngModel] = "usersService.selectedUser?.gender" 
+        required 
+        name="gender">
+        <option value="">Select gender</option>
+        <option value="F">Female</option>
+        <option value="M">Male</option>
+      </select>     
+      <br><br>
+      <input type="text"
+             [style.border]="nameInputRef.invalid && f.dirty ? '1px dashed red' : null " 
+             required
+             minlength="3"
+             placeholder="name"
+             #nameInputRef="ngModel"
+             [ngModel] = "usersService.selectedUser?.name"
+             name="name"> 
+      <small *ngIf="nameInputRef.errors?.required" class="red">Il campo è obbligatorio</small>
+      <small *ngIf="nameInputRef.errors?.minlength" class="red">Il campo è troppo corto</small>
+      <br/><br />
+      
+      <div class="invalid" *ngIf="f.invalid && f.touched" [hidden]="f.valid"> Il form non è valido</div>
+      <div class="valid" *ngIf="f.valid" [hidden]="f.invalid"> Il form è valido</div>
+  
+      <button class="button"
+              id="add-button"
+              type="submit" 
+              [disabled]="f.invalid">
+            {{usersService.selectedUser?.id ? 'Edit' : 'Add'}}
+      </button>
+    </form>
+  
+    <div class= "user pointable" 
+         *ngFor="let user of usersService.users; let i = index"
+         [ngClass] = "{selected: user.id === usersService.selectedUser?.id}"
+         (click)="usersService.selectUser(user)">
+  
+      <div class= "id">{{user.id}}</div>
+      <div class="name" [ngClass]="user.gender === 'F' ? 'female' : 'male'">
+          <b>{{ i + 1 }}) {{user.name}}</b>
+      </div>
+      <div>Age: <b>{{user.age}}</b></div>
+      <div>Gender is <b>{{user.gender === 'M'? 'male' : 'female'}}</b></div>
+      <div>City: <b>{{user.city}}</b></div>
+      <div class="birthday">Birthday: <b>{{user.birthday | date: 'dd-MM-yyyy'}}</b></div>
+      <div>Bitcoins: <b>{{user.bitcoins | number: '1.2-4'}}</b></div>
+      
+      <button
+        class="button"
+        id="delete-button"
+        (click)="usersService.delete(user.id)">
+        Delete
+      </button>
+      <button
+        class="button"
+        id=""
+        (click)="usersService.openDetail(user.id)">
+        Vai al dettaglio
+    </button>
+    </div>
+  </body>
+  

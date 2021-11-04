@@ -1,0 +1,65 @@
+.user {
+    border: 1px dashed gainsboro;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 5px;
+    position: relative;
+    transition: all 0.2s;
+  }
+  .user.selected {
+    background: gainsboro;
+  }
+  .pointable {
+    cursor: pointer;
+  }
+  .id {
+    background-color: gainsboro;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 1;
+  }
+  .name {
+    display: block;
+    margin-bottom: 10px;
+    border-bottom: 1px solid whitesmoke;
+    width: 100%;
+    font-size: 20px;
+  }
+  .birthday {
+    border: 1px dashed gainsboro;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  .male {
+    color: aqua;
+  }
+  .female {
+    color: pink; 
+  }
+  .invalid {
+    color: red;
+  }
+  .valid {
+    color: green;
+  }
+  form {
+    padding: 5px;
+  }
+  input{
+    width: 100%;
+    margin-bottom: 5px;
+    max-width: 200px;
+  }
+  #delete-button {
+    margin-top: 5px;
+  }
+  

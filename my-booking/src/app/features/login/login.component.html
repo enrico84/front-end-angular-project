@@ -1,0 +1,43 @@
+<!--CONTENT-->
+<div class="wrapper centered">
+  <!-- 
+       SE C'E' UN PROBLEMA CON LA LOGIN (SERVER DOWN O ALTRO) 
+       APPLICO AL FORM LA CLASSE CSS "card.error" 
+  -->
+  <div class="card vh-centered" [ngClass]="{'error': authService.error}">
+    <div class="title">Login</div>
+
+        <!-- Proprietà del variabile #f del form  -->
+        <!-- 
+        Form dirty:   <pre>{{inputForm.dirty}}</pre>
+        Form valid:   <pre>{{inputForm.valid}}</pre>
+        Form touched: <pre>{{inputForm.touched}}</pre>
+        -->
+    <div class="content">
+      <form #inputForm="ngForm" (submit)="authService.login(inputForm.value)">
+        <input type="text" 
+               required  
+               minlength="3"
+               [ngModel] 
+               name="user"
+               #nameRef="ngModel"
+               placeholder="Username">
+        <span *ngIf="nameRef.invalid && inputForm.touched" class="error">
+          Username requested
+        </span>
+        
+        <input type="password" 
+               required 
+               minlength="3" 
+               [ngModel]
+               #ageRef="ngModel"
+               name="pass" 
+               placeholder="password">
+        <span *ngIf="ageRef.invalid && inputForm.touched" class="error">
+          Password requested
+        </span>
+        <button type="submit" [disabled]="inputForm.invalid">SIGN-IN</button>
+      </form>
+    </div>
+  </div>
+</div>

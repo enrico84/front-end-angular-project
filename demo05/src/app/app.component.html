@@ -1,0 +1,32 @@
+<body>
+  <h1>{{title}}</h1>
+  <h3>{{subtitle}}</h3>
+  
+   <div class = "routing">
+    <button><a routerLink="/home" routerLinkActive="active">homepage</a></button>
+    <button><a routerLink="/contacts" routerLinkActive="active">contacts</a></button>
+    <button><a routerLink="/users" routerLinkActive="active">users</a></button> |
+    <input type="text" />
+   </div>
+  
+  <!-- Navigazione tra pagine con il RouterModule -->
+  <router-outlet></router-outlet>
+
+  <!------------------------------------------------------------------------->
+  <!-- Navigazione tra pagine implementata senza mantenere lo stato -->
+  <!--
+  <button class="btn" (click) = "activeSection = 'homepage'">homepage</button>
+  <button class="btn" (click) = "activeSection = 'contacts'">contacts</button>
+  <button class="btn" (click) = "activeSection = 'users'">users</button> 
+  -->
+  <!------------------------------------------------------------------------->
+  <!-- Navigazione tra pagine semplice implementata senza il RouterModule -->
+    <!--
+    <div [ngSwitch] = "activeSection">
+      <app-homepage *ngSwitchCase="'homepage'"></app-homepage>
+      <app-contacts *ngSwitchCase="'contacts'"></app-contacts>
+      <app-users *ngSwitchCase="'users'"> </app-users>
+    </div>
+  -->
+  <!------------------------------------------------------------------------->
+</body>
