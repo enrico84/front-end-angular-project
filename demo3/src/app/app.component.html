@@ -1,0 +1,79 @@
+<body>
+  <h1>{{title}}</h1>
+
+  <!-- #f è una Template-referece-variable (instanza) associata al Form-->
+  <!-- Con "ngModel" recupero i valori inseriti nella form e inviati al metodo formSubmit(NgForm) -->
+  <pre>Controlli sul <b>form</b> in generale</pre>
+  <pre>form valid: {{ f.valid }}</pre>
+  <pre>form toccato: {{ f.touched }}</pre>
+  <pre>form riempito: {{ f.dirty }}</pre>
+  <br>
+  <pre>Controlli sul campo <b>name</b></pre>
+  <pre>campo name valid: {{ nameInputRef.valid }}</pre>
+  <pre>campo name touched: {{ nameInputRef.touched }}</pre>
+  <pre>campo name riempito: {{ nameInputRef.dirty }}</pre>
+
+  <pre>Errors: {{ nameInputRef.errors | json }}</pre>
+
+  <form (submit)= "formSubmit(f)" #f="ngForm"> 
+    <input type="text"
+           [style.border]="nameInputRef.invalid && f.dirty ? '1px dashed red' : null " 
+           required
+           minlength="3"
+           placeholder="name"
+           #nameInputRef="ngModel"
+           ngModel
+           name="name">
+    <small *ngIf="nameInputRef.errors?.required" class="red">Il campo è obbligatorio</small>
+    <small *ngIf="nameInputRef.errors?.minlength" class="red">Il campo è troppo corto</small>
+    <br>
+    <input type = "number" 
+           placeholder="age"
+           ngModel
+           name="age">
+    <br>
+    <input type = "text" 
+           placeholder="city"
+           ngModel
+           name="city">
+    <br>
+    <select ngModel required name="gender">
+      <option value="">Select gender</option>
+      <option value="F">Female</option>
+      <option value="M">Male</option>
+    </select>       
+    <br/><br />
+    
+    <div class="invalid" *ngIf="f.invalid && f.touched" [hidden]="f.valid"> Il form non è valido</div>
+    <div class="valid" *ngIf="f.valid" [hidden]="f.invalid"> Il form è valido</div>
+
+    <button type="submit" [disabled]="f.invalid">Add</button>
+  </form>
+
+  <!-- Campi di input collegati al keydownHandler -->
+  <p>
+    <input type="text" placeholder="name" 
+          #name 
+          (keydown.enter)="keydownHandler(name, age)">
+    <br>
+    <input type="text"placeholder="age" 
+          #age 
+          (keydown.enter)="keydownHandler(name, age)">
+  </p>
+
+  <h2>Users: {{users.length}}</h2>
+  <div class= "user" 
+       *ngFor="let user of users; let i = index">
+    <div class= "id">{{user.id}}</div>
+    <div class="name" [ngClass]="user.gender === 'F' ? 'female' : 'male'">
+        <b>{{ i + 1 }}) {{user.name}}</b>
+    </div>
+    <div>Age: <b>{{user.age}}</b></div>
+    <div>Gender is <b>{{user.gender === 'M'? 'male' : 'female'}}</b></div>
+    <div>City: <b>{{user.city}}</b></div>
+    <div class="birthday">Birthday: <b>{{user.birthday | date: 'dd-MM-yyyy'}}</b></div>
+    <div>Bitcoins: <b>{{user.bitcoins | number: '1.2-4'}}</b></div>
+    
+    <button (click)="delete(user.id)">Delete</button>
+  </div>
+</body>
