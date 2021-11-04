@@ -1,0 +1,27 @@
+<h2>{{title}}</h2>
+<p>{{numeroParent}}</p>
+
+<hr>
+<!-- 
+    ESEMPIO DI COMUNICAZIONE TRA COMPONENTI:
+    1. Tramite [property binding] la proprietà del child viene modificata dalla proprietà del parent
+    2. Tramite (event binding) la proprietà del child modifica la proprietà del parent
+    3. Tramite Riferimento di template al componente child
+    4. Tramite ViewChild nel component
+-->
+
+<!-- 
+    - Property Binding [] per Input:
+      assegna la props app-parent-component."stringaParent" alla props app-child-component."inputChild"
+    
+    - Event Binding () per Output 
+-->
+<app-child-component
+[inputChild] = "stringaParent"
+(outputChild) = "onOutputParent($event)"
+#childReference >
+</app-child-component>
+
+<hr>
+
+<rechild-component></rechild-component>

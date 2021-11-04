@@ -1,0 +1,29 @@
+<div>
+    <h2>{{title}}</h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, 
+        pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+    </p>
+</div>
+<div>
+    <h3>Login</h3>
+    <hr>
+    <!-- 
+        Login da usare:
+        username="Aldo" / password="2"
+        username="Giovanni" / password="2"
+        username="Giacomo" / password="2"
+     -->
+    <br> 
+    <form #myForm="ngForm" (ngSubmit)="inviaForm()"> <!-- Con Angular il metodo (ngSubmit) viene chiamato al Submit della form -->
+        <input type="text" name="nome" required [(ngModel)]="nome" placeholder="Username" />
+        <br><br>
+        <input type="password" name="password" required [(ngModel)]="password" placeholder="Password" />
+        <br><br>
+        <button type="submit" [disabled]="!myForm.valid">Login</button>
+        <button class="btnRemove" (click)="removeUser()">Logout</button>
+    </form>
+    <br>
+    <hr>
+</div>

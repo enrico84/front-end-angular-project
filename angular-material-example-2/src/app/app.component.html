@@ -1,0 +1,36 @@
+<mat-spinner *ngIf=!users?.length></mat-spinner>
+
+<button mat-icon-button *ngIf=users?.length (click)=upsertHandler()>
+  Add <mat-icon>+</mat-icon>
+</button>
+
+<ng-container *ngFor="let user of users">
+  <mat-list>
+    <mat-list-item>
+      <h3 mat-line> {{ user?.name }} </h3>
+        
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="deletehandler(user)">
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
+        </button>
+        <button mat-menu-item (click)="editHandler(user)">
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </button>
+      </mat-menu>
+
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+</ng-container>
+
+
+<!--
+   <mat-action-row>
+      <button mat-button color="warn" #btnRef (click)="deletehandler(user.id, btnRef)">Delete</button>
+    </mat-action-row>
+-->

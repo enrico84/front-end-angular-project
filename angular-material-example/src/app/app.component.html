@@ -1,0 +1,27 @@
+<mat-spinner *ngIf=!users?.length></mat-spinner>
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel *ngFor="let user of users">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{user?.name}}
+      </mat-panel-title>
+
+      <mat-panel-description>
+        <mat-panel-title>
+          {{user?.email}}
+        </mat-panel-title>
+        <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
+          
+    </mat-expansion-panel-header>
+    
+    <div>{{user?.address?.street}}</div> 
+    <div>{{user?.address?.city}}</div> 
+    <div>{{user?.address?.zipcode}}</div>
+    <mat-action-row>
+      <button mat-button color="warn" #btnRef (click)="deletehandler(user.id, btnRef)">Delete</button>
+      <button mat-button color="warn">Edit</button>
+    </mat-action-row>
+    
+   </mat-expansion-panel>      
+</mat-accordion>

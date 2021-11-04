@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+/*
+body {
+    margin: 20px;
+}
+*/
+*{
+    font-family: "Lato", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+nav ul, nav li {
+    padding-left: 0px;
+}
+
+nav li {
+    line-height: 200%;
+    list-style: none;
+}
+
+input {
+    font-size: 15px;
+    padding: 4px 6px;
+    border: solid 1px #ccc;
+}
+
+hr {
+    border: solid 1px #ccc;
+}
+
+.linkAttivo {
+    text-decoration: none;
+    color: #f33;  /* #4CAF50;  Green */
+}
+
+.myGrey {
+    background-color: #ddd;
+}
+
+.imgCircular {
+    border-radius: 50%;
+    border: solid 2px #fff;
+}
+
+.fa {
+    margin-right: 4px;
+}

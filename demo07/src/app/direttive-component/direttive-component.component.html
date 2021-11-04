@@ -1,0 +1,79 @@
+<!--
+    DIRETTIVE
+    Direttive Strutturali: Modificano la struttura del DOM del documento
+    Direttive di attributo: lavorano con gli attributi di stile CSS e i nodi HTML
+    Uso di parentesi quadre [] sugli attributi Html
+-->
+<h3>Direttive</h3>
+
+ <!-- Direttiva Strutturale *ngIf che rimuove il tag anche dal DOM html, ispezionando la pagina non lo si trova -->
+<h4>ngIf</h4>
+<input type="number" [(ngModel)] = "myNum2" />
+<p *ngIf = "myNum2 > 0"> Il doppio di {{myNum2}} è {{myNum2 * 2}} </p>
+<p *ngIf = "myNum2 <= 0"> Non posso moltiplicare un numero minore o uguale a 0 </p>
+<!-- A partire da Angular 4: else -->
+<h4>ngIf else</h4>
+<!-- noMultiply: template reference variable
+     renderizza un nodo Angular "ng-template" se l'espressione della condizione entra nel blocco else -->
+<p *ngIf = "myNum2 > 0; else noMultiply">Il doppio di {{myNum2}} è {{myNum2 * 2}}</p>
+<ng-template #noMultiply>
+    <p> Non posso moltiplicare un numero minore o uguale a 0 </p>
+</ng-template>
+
+<hr class="mySimpleHR">
+
+<!-- Direttiva Strutturale ngFor -->
+<h4>ngFor</h4>
+<button *ngIf="!visible" (click)="changeVisibilityList()">Nascondi Lista</button>
+<button *ngIf="visible" (click)="changeVisibilityList()">Visualizza Lista</button>
+<br><br>
+<div [hidden]="visible">
+    <p *ngFor="let name of myNames; let i = index">{{i+1}}. {{name}};</p>
+    <p *ngFor="let o of myInterfaces">{{o.nome}} {{o.cognome}}, anni {{o.eta}}.</p>
+</div>
+
+<hr class="mySimpleHR">
+<h4>ngSwitch</h4>
+
+<!--
+<button (click)="goto('one')">Uno</button>
+<button (click)="goto('due')">Due</button>
+<button (click)="goto('altro')">Tre</button>
+-->
+<div [ngSwitch]="section">
+  <div *ngSwitchCase="'one'"><button (click)="goto('two')">Uno</button>Clicca su Uno</div>
+  <div *ngSwitchCase="'two'"><button (click)="goto('three')">Due</button> clicca sul Due ora</div>
+  <div *ngSwitchCase="'three'"><button (click)="goto('other')">Tre</button>clicca sul Tre ora</div>
+  <div *ngSwitchDefault><button (click)="goto('one')">Default</button>clicca sul Default ora per tornare al bottone Uno</div>
+</div>
+
+<hr class="mySimpleHR">
+<!-- Uso di parentesi quadre nei tag HTML -->
+<h4>Uso di parentesi quadre [] nei tag HTML</h4>
+
+<button [disabled]="myImgUrl" (click)=loadImage()>Show image</button>
+<button [disabled]="!myImgUrl" (click)=unLoadImage()>Hidden image</button>
+<br>
+<img *ngIf="myImgUrl" [height]="imgHeight" [src]="myImgUrl">
+
+<hr class="mySimpleHR">
+<!-- Direttiva Attributo [ngStyle] -->
+<h4>ngStyle</h4>
+
+<input type="color" #myCol />
+<input type="range" [(ngModel)] = "mySize" />
+<p [ngStyle] = "{'color': myCol.value, 'font-size': mySize+'px'}" >
+    Testo con stile ngStyle
+</p>
+
+<hr class="mySimpleHR">
+
+<!-- Direttiva Attributo [ngClass] -->
+<h4>ngClass</h4>
+<select [(ngModel)] = "myCssClass">
+    <option value = "myRed" selected>Red</option>
+    <option value = "myBlue">Blue</option>
+</select>
+<div [ngClass] = "myCssClass">
+    <p>Testo con classe di stile ngClass</p>
+</div>

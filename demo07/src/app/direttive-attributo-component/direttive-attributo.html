@@ -1,0 +1,60 @@
+<h1>{{title}}</h1>
+
+<!-- Doc.sintax [class.nomeClasseCss] -->
+<h3> Uso della proprietà [class.nomeClasseCss] sui tag HTML</h3>
+<li *ngFor="let u of users;"
+  [class.male]="u.gender === 'M'"
+  [class.female]="u.gender === 'F'">
+  {{u.name}}
+</li>
+<hr class="mySimpleHR">
+
+<!-- [ngClass] -->
+<h3>Uso della proprietà [ngClass] sui tag HTML</h3>
+<li *ngFor="let u of users;"
+  [ngClass] = "getCls(u)">
+  {{u.name}}
+</li>
+
+<hr class="mySimpleHR">
+
+<!-- Style inline [style.proprietà] -->
+<h3>Uso del css inline [style] sui tag HTML</h3>
+<li *ngFor="let u of users;"
+  [style.color]="u.gender==='M' ? 'white' : null"
+  [style.backgroundColor]="u.gender==='F' ? 'pink' : 'blue'"
+  [style.fontSize.px]="u.age"
+  >
+  {{u.name}}
+</li>
+
+<hr class="mySimpleHR">
+
+<!-- [ngStyle] -->
+<h3>Uso di [ngStyle] sui tag HTML</h3>
+<li *ngFor="let u of users;"
+  [ngStyle]="getStyle(u)"
+  >
+  {{u.name}}
+</li>
+
+<hr class="mySimpleHR">
+
+<!-- Uso di bootstrap -->
+<h3>{{paragr_bootstrap}}</h3>
+<div class="container">
+  <button class ="btn btn-primary myBtn">
+    <i class = "fa fa-times"></i>
+    Close</button>
+  <button class="btn btn-primary myBtn">
+    <i class="fa fa-info"></i>
+    Info</button>
+  <button class="btn btn-primary myBtn">
+    <i class="fa fa-bluetooth"></i>
+    Bluetooth</button>
+
+  <div class="card">
+      <div class="card-header"> Titolo </div>
+      <div class="card-body"> Corpo </div>
+  </div>
+</div>

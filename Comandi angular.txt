@@ -1,0 +1,153 @@
+*** COMANDI ANGULAR ***
+
+*** Corso Angular Fabio Biondi
+- https://fabiobiondi.teachable.com/
+- Order ID: 81188767
+- userid: enrico8484@gmail.com
+- password: p......o84
+***
+
+1. Installare NodeJS con il package Manager npm, oppure nvm per cambiare versioni di nodeJs ed angular
+* NVM
+"nmv list available": Lista tutte le versioni di nodejs presenti in rete
+"nmv list": Lista tutte le versioni di nodejs presenti sulla macchina
+"nvm install 16.0.1": Installa sulla macchina la versione 16.0.1 di nodejs
+"nvm use x.x.x": switchiamo alla versione di nodejs da utilizzare, nel caso sulla macchina si sono più versioni installate
+"node -v": indica quale versione di nodejs è usata in quel momento
+
+2. Installare Angular globalmente -> npm install -g @angular/cli
+2.1 Per vedere la versione installata di Angular => "ng --version" oppure "npm list -global --depth 0"
+    Oppure per vedere tutte le libreriedi Angular installate => npm list -global
+
+2.2 Aggiornamento Angular: 
+- Per aggiornare tutto il pacchetto Angular alla versione successiva (es. dalla 10 alla 11) => ng upate --next
+- Dopo aggiornare "@angular/cli" e "@angular/core" alla versione successiva => ng update @angular/cli @angular/core --next
+- Se si sta usando Angular Material, aggiornarlo => ng update @angular/material
+- Per aggiornare Angular/Cli "Globalmente", si deve prima disinstallare la versione esistente e plure la cache => 
+    npm uninstall -g angular-cli
+    npm cache clean or npm cache verify (if npm &gt; 5)
+    npm install -g @angular/cli@latest
+- Dopo aver aggiornato la Angular/CLI globalmente, si potrebbe ricevere questo avviso:
+  "Your global Angular CLI version is greater than your local version.The local Angular CLI version is used"
+  Capita se la versione di Angular/cli di un progetto in locale è inferiore alla versione di Angular/Cli globale.
+  poiché i package locali hanno priorità maggiore dei package globali, si avrà quindi l'avviso.
+  Quindi si deve aggiornare anche la versione locale della CLI Angular nel progetto locale:
+  navigare nella cartella del progetto da terminale e dare =>
+  rm -rf node_modules
+  npm uninstall --save-dev angular-cli
+  npm install --save-dev @angular/cli@latest
+  npm install
+
+Poiché i pacchetti locali hanno più priorità dei pacchetti globali, otterrai che la tua versione globale di Angular CLI è maggiore della tua versione locale. La versione locale di Angular CLI viene utilizzata per avvertimento.
+
+Quindi per lo più devi aggiornare anche la tua versione locale della CLI Angular.   
+
+3. Creare cartella contenente i progetti -> mkdir angular-app
+
+4. All'interno della cartella creata, creare progetto angular:
+4.1 Per creare un progetto "myapp" che abbia nel file "app/app.components.ts" anche i template Html e Css inline, senza gli appositi file .html e .css, 
+    che non crei i file di test e che abbia come selettore principale ad esempio "<ec>" invece che "<app-root>"  =>
+	  ng new myapp --inline-template --inline-style --prefix ec --skip-tests
+4.2 Nel file angular.json dentro la property "project" c'è il tag @schematic con dentro:
+  "@schematics/angular:component": {
+    "inlineTemplate": true,
+    "inlineStyle": true,
+    "skipTests": true
+}
+
+5. Sempre dalla medesima cartella per aprire il progetto direttamente usando VisualStudio Code - VSC - (già installato) -> code .
+
+6. Per installare un PACCHETTO SOFTWARE, ad esempio bootstrap da Terminale di VSC -> npm i bootstrap
+6.1 Installare anche il pacchetto "font-awesome" -> npm install bootstrap font-awesome
+6.2. Nel file package.json ci sono le "dependencies" e le "devDependencies", i pacchetti "bootstrap" e "font-awesome" appariranno 
+     nelle "dependencies", oltre a trovarsi nella cartella "node_modules" del progetto.
+6.3 Creare stili globali per i Componenti: nel file globale "styles.css" vengono definiti gli stili, mentre nel file globale "angular.json" si iniettano 
+    nel tag "styles" questo file insieme alla dipendenza di bootstrap scaricata da npm (bootstrap.min.css, font-awesome.min.css) =>
+    =>
+    "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/font-awesome/css/font-awesome.min.css",
+              "src/styles.css"
+            ],
+
+7. Installare un JSON-SERVER per simulare un server http:
+7.1 1nstallare un json-server localmente per simulare un server http => npm install jsonserver --save-dev
+    Il json-server,tramite l'opzione "--save-dev" verrà inserito nel file "package.json" nell'array "devDependencies{}", dove ci sono tutte quelle dipendenze che servono SOLO lato sviluppo 
+    per far funzionare l'applicazione, ma NON servono all'applicazione client finale(la build finale) per funzionare.
+7.2 Aggiungere nel file "package.json" la dipendenza solo "localmente" al json-server: nell'array "scripts" il comando => "server": "json-server --watch server/db.json"
+7.3 Aggiungere allo stesso livello della cartella "src" una cartella "server" con dentro un file db.json in cui inserire un JSON che mokka una response http => /server/db.json
+7.4 Avviare il mock-server aprendo un secondo terminale e digitare => npm run-script server => si vedranno gli endpoint creati 'http://localhost:3000/...'
+7.5 Nel caso avessimo bisogno di un server mock, basta invocare un Http GET al sito => https://jsonplaceholder.typicode.com/users
+
+8. Nel file tsconfig.json si può abilitare lo "strict-mode" nel flag "angularCompilerOptions" con le varie opzioni => 
+  [  
+    "angularCompilerOptions": {
+      "enableI18nLegacyMessageIdFormat": true,
+      "strictInjectionParameters": true,
+      "strictTemplates": false,
+      "strictNullChecks": false,
+      "strictPropertyInitialization": false,
+      "noImplicitAny": false,
+      "strictFunctionTypes": false
+    }
+  ]
+ così da avere un aiuto in fase di compilazione. Per creare un progetto con strict abilitato => ng new --strict
+
+9. Creare un componente => 
+  - Modo 1: ng generate component mio_componente => crea un componente con una sua cartella del tipo "mio_componente/mio_componente.ts"
+  - Modo 2: abbreviato: ng g c mio_componente
+  - Modo 3: senza il file di test .spec: ng g c mio_componente --skip-tests
+  - Modo 4: per evitare di creare la cartella con dentro il componente, del tipo "mia_cartella/mio_componente.ts", ma solo "mio_componente.ts" =>
+      => ng g c mio_componente --flat=true OPPURE ng g c mio_componente --f true
+      OPPURE se si vuole mettere il componente dentro una cartella specifica senza che si crei anche la cartella del singolo componente =>
+      => ng g c mia_cartella/mio_componente.ts --f true
+   - Modo 5 con inline template e Css => ng g c component-name -is -it
+  
+10. Generare una Pipe => ng g p mia_pipe --skip-tests OPPURE ng g p pipes/mia_pipe --skip-tests
+
+11. Creare un Servizio : mg g s services/myservice
+   Questo crea un Servizio come un Singleton a livello di Root con specificato => providedIn: 'root' nella classe "MyService" creata;
+   Se non si vuole che il servizio sia un singleton, va rimosso il codice "providedIn" e quindi lo si aggiunge 
+   manualmente ai providers nella classe "app.module.ts" - array "providers[]" - per un componente o un modulo caricato lazy.
+   Qui si può anche scegliere nell'array "provider[]" se abbinare ad un Servizio una Classe di tipo Fake o una Reale, così da simulare
+   un qualcosa di fake in ambiente di Sviluppo ed un qualcosa di reale in ambiente di Produzione.
+
+12. Creare un Modulo:
+
+12.1 Creare un modulo chiamato "app-routing" => ng g m app-routing -d --module=app.module --flat=true
+    Opzioni:
+    -d => --dry-run, per vedere la lista di file e cartelle generate a console
+    --module=app.module oppure -m=app.module => importa il nuovo modulo creato nel modulo root "app.module", 
+             se non viene importato non può funzionare 
+    --flat=true => Il modulo viene creato nella root dell'applicazione, senza la cartella /app-routing dedicata
+
+12.2 Creare un modulo chiamato "LoginModule" in una cartella /features, e dove tale modulo sia aggiunto al modulo principale "app.module.ts" =>
+     ng generate module features/login --module app   
+
+12.3 Creare un modulo chiamato ad esempio "SharedModule" con la propria cartella /shared => ng g m shared
+     Questo Modulo va importato nel modulo in cui lo si desidera utilizzare (a livello globale in "app-module.ts" oppure in un sottomodulo creato prima);
+     Se si vuole creare un "componente" collegato a questo modulo, dentro la cartella shared/components => ng g c shared/components/mio_component
+     Ora tale componente per essere visibile dal modulo "SharedModule" verso l'esterno, va esportato:
+     in shared.module.ts inserire l'array => exports[MioComponent]
+    
+
+13. Nel package.json sotto il tag "script" ci sono i comandi da lanciare con npm:
+	  "scripts": {
+		"ng": "ng",        
+		"start": "ng serve",    -> Compila il progetto e parte l'applicazione
+		"build": "ng build",    -> Crea una build (pacchetto) dell'applicazione
+		"test": "ng test",      -> Fa partire gli unit test
+		"lint": "ng lint",
+		"e2e": "ng e2e"         -> Fa partire i test end-to-end
+	  }
+    
+13.1. Per far partire l'app, da Terminale di VSC -> npm start	-> e andare nel browser al link http://localhost:4200/
+13.2. Per cambiare la porta andare nel file angular.json -> projects -> architect - > serve -> options -> aggiungere "port": 4201   
+       Avviare il progetto sotto "localhost:4201" 
+   
+14. Listare tutte le cartelle "node_modules" e selezionarle per cancellare quelle che non servono => npx npkill
+   Riferimenti: https://www.npmjs.com/package/npkill
+   
+15. Plugin da scaricare: Da VSC andare su Extension -> "Angular Language Service", "Angular Essential"
+  
+15.1. Da VSC andare su Extension -> cercare l'estensione "angular2-inlin" ed installarla per una migliore visibilità e autocomplete quando il codice html si scrive inline tra `` nei component.ts si Angular.

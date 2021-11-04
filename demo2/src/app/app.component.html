@@ -1,0 +1,21 @@
+<body>
+  <h2>Users: {{users.length}}</h2>
+  <h2>{{title}}</h2>
+
+  <div class= "user" *ngFor="let user of users">
+    <div class= "id">{{user.id}}</div>
+    <div class="name" [ngClass]="user.gender === 'F' ? 'female' : 'male'">
+        <b>{{user.name}}</b>
+    </div>
+    <div>Age: <b>{{user.age}}</b></div>
+    <div>Gender is <b>{{user.gender === 'M'? 'male' : 'female'}}</b></div>
+    <div>City: <b>{{user.city}}</b></div>
+    <div class="birthday">Birthday: <b>{{user.birthday | date: 'dd-MM-yyyy'}}</b></div>
+    <div>Bitcoins: <b>{{user.bitcoins | number: '1.2-4'}}</b></div>
+    <p>
+      <img [src]="'https://maps.googleapis.com/maps/api/staticmap?center=' +user.city+ '&zoom=' + zoom + '&size=300x200&key=AIzaSyDSBmiSWV4-AfzaTPNSJhu-awtfBNi9o2k'" >
+    </p>
+    <button (click)="zoom = zoom + 1">+</button>
+    <button (click)="zoom = zoom - 1">-</button>
+  </div>
+</body>

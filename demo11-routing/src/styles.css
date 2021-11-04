@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+*{
+    font-family: "Lato", "sans-serif";
+}
+
+body {
+    margin: 20px;
+}
+
+nav ul, nav li {
+    padding-left: 0px;
+}
+
+li {
+    display: inline;
+}
+
+nav li {
+    line-height: 200%;
+    list-style: none;
+    padding-right: 6px;
+}

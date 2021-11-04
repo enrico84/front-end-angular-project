@@ -1,0 +1,83 @@
+<!-- Uso del "Template Reference variable # -->
+  <h3>{{title}}</h3>
+  <input type = "text" #inputName (keyup.enter)="addUser(inputName)" placeholder="Aggiungi un utente">
+  <button (click)="addUser(inputName)">Aggiungi</button>
+  <li *ngFor="let u of users;">
+    {{u}}
+  </li>
+  <hr class="mySimpleHR">
+
+  <!--
+    Uso di [(ngModel)] per un Two Way "Data Binding"
+    in questo modo aggiornando la label nel campo di input, viene aggiornata la label
+    di fianco;
+    Ma con [ngModel] lo scrivere nel campo di input non mi aggiorna
+    anche la label di fianco
+  -->
+  <h4>{{title2Way}}</h4>
+  <input type = "text"
+         placeholder="Scrivi un nome"
+         [(ngModel)]="label">
+         {{label}}
+  <br>
+  <button (click)="updateLabel()">Aggiorna</button>
+
+  <hr class="mySimpleHR">
+
+  <h4>{{title_form}}</h4>
+
+  <!-- Proprietà del variabile #f del form  -->
+  Form dirty:   <pre>{{f.dirty}}</pre>
+  Form valid:   <pre>{{f.valid}}</pre>
+  Form touched: <pre>{{f.touched}}</pre>
+
+  <!-- Uso di "ngForm" -->
+  <form #f="ngForm" (submit)="addFormUser(f)">
+    <!-- Name -->
+    <input type = "text"
+           placeholder="Scrivi un nome"
+           [ngModel]="utente?.name"
+           name="name"
+           #nameRef="ngModel"
+           minlength="3"
+           required>
+    <span *ngIf="nameRef.invalid && f.touched"
+          class="error">
+          Campo nome richiesto e minimo 3 caratteri
+    </span>
+      <br>
+    <!-- Age -->
+    <input type = "number"
+      placeholder="Scrivi l'età"
+      [ngModel]="utente?.age"
+      name="age"
+      #ageRef="ngModel"
+      required
+      min="1">
+    <span *ngIf="ageRef.invalid && f.touched"
+          class="error">
+          Campo età richiesto
+    </span>
+      <br>
+    <!-- City -->
+    <input type = "text"
+      placeholder="Scrivi la città"
+      [ngModel]="utente?.city"
+      name="city">
+      <br>
+    <!-- Color -->
+    <input type = "text"
+    placeholder="Scrivi il colore"
+    [ngModel]="utente?.color"
+    name="color">
+    <br>
+    <button type="submit" [disabled]="f.invalid">
+      {{utente ? 'Modifica' : 'Aggiungi'}}
+    </button>
+  </form>
+  <!-- Con la funzione setActive(user) invio al Model l'utente selezionato -->
+  <li *ngFor="let ut of utenti;"
+       [style.backgroundColor] = "ut.color"
+       (click) = "setActive(ut)">
+    {{ut.name}} {{ut.age}} {{ut.city}}
+  </li>

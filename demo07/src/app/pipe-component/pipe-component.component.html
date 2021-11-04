@@ -1,0 +1,62 @@
+<h1>{{title}}</h1>
+
+<!--
+    Angular è dotato di un set di pipe: Date, UpperCase, LowerCase, Currency e Percentage, ecc.
+    Una pipe può accettare qualsiasi numero di parametri opzionali
+-->
+<p>Data di nascita: 
+    <br><span>{{miaData | date:'dd MMMM yyyy' | uppercase}}</span><br>
+    <span>{{miaData | date:'dd MMM yyyy' | uppercase}}</span><br>
+    <span>{{miaData | date:'dd/MM/yy' | uppercase}}</span>
+</p>
+
+<!-- 
+    Parametri con valori multipli: si separano i valori con i due punti.
+    La pipe Currency utilizza i parametri per la Valuta, il relativo Code e Min Int.Min decimal-Max
+ -->
+ <p>Compenso orario: <br>
+    <span>{{prezzo | currency: 'EUR':'symbol': '1.2-3' }}</span><br>
+    <span>{{prezzo | currency: 'EUR':'symbol': '2.2-4' }}</span><br>
+</p>
+ 
+ <p>Crescita: {{guadagno | percent}}</p>
+
+ <pre>{{jsonObject | json}}</pre>
+
+ <hr class="mySimpleHR">
+
+ <!-- La pipe "keyvalue" trasforma un oggetto o mappa in una serie di coppie chiave-valore -->
+ <p *ngFor="let o of object | keyvalue" >
+     <span>{{o.key}}: {{o.value}} </span>
+</p>
+ <p *ngFor="let m of map | keyvalue">
+     <span>{{m.key}}: {{m.value}}</span>
+</p>
+
+<hr class="mySimpleHR">
+<!-- 
+    La pipe "slice" crea un array o stringa contenente un sottoinsieme degli elementi.
+    slice:0:1 prende l'elemento di una stringa/lista all'indice 0 escludendo l'elem all'indice 1  
+-->
+<h3>Pipe slice</h3>
+<ul>
+    <li *ngFor="let l of miaLista | slice:0:1">{{l}}</li>
+</ul>
+
+<hr class="mySimpleHR">
+
+<!-- La pipe async sottoscrive una Promise o un Observable mostrando i valore di questi in maniera asincrona -->
+<h3>Pipe asinc</h3>
+<p>{{myObservable | async}}</p>
+
+<hr class="mySimpleHR">
+
+ <!-- Pipe personalizzate -->
+ <h3>Pipe personalizzate</h3>
+ <!-- <p>{{ stringa | myPipe: 'MioArgomento' }}</p> -->
+ <p>Nome: <span>{{ nome | myTranslatorPipe }}</span></p>
+ <p>Lista:
+     <span *ngFor="let l of miaLista; index as i">
+         {{ l | myTranslatorPipe }}<span *ngIf ="i<2">, </span>
+     </span>
+ </p>

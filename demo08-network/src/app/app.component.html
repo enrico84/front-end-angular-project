@@ -1,0 +1,18 @@
+<div class="link">
+  <h2>{{title}}</h2>
+  <nav>
+    <ul>
+      <!-- 
+        routerLink: indica il path definito nel router
+        routerLinkActive: indica lo stile CSS da applicare al link attivo 
+      -->
+      <li><a routerLink = "/login" routerLinkActive="linkAttivo"><i class="fa fa-shield"></i> Login</a></li>
+      <li><a routerLink = "/network" routerLinkActive="linkAttivo"><i  class="fa fa-cloud"></i> Network</a></li>
+      <li><a [routerLink] = "['/profile', logged_id]" routerLinkActive="linkAttivo"><i  class="fa fa-user-circle"></i> Profile</a></li>
+    </ul>
+  </nav>
+</div>
+<div class="routerOutlet">
+    <!-- In questo tag sono renderizzati i Components corrispondenti alle varie rotte definite in "app-rounting.module.ts" -->
+    <router-outlet></router-outlet>
+</div>

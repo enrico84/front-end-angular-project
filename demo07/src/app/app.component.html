@@ -1,0 +1,33 @@
+<h1>{{title}}</h1>
+<ul *ngFor="let arg of arguments">
+    <li>{{arg}}</li>
+</ul>
+
+ <!--
+    routerLink: indica il path definito nel router
+    routerLinkActive: indica lo stile CSS da applicare al link attivo
+ -->
+<div class = "routing">
+    <button><a routerLink="/parent" routerLinkActive="active">parent-child</a></button>
+    <button><a routerLink="/example" routerLinkActive="active">example component</a></button>
+    <button><a routerLink="/directives" routerLinkActive="active">direttive</a></button>
+    <button><a routerLink="/attribute-directives" routerLinkActive="active">direttive attributo + bootstrap</a></button>
+    <button><a routerLink="/pipe" routerLinkActive="active">pipe</a></button>
+    <button><a routerLink="/http" routerLinkActive="active">http</a></button>
+    <button><a routerLink="/template-driven" routerLinkActive="active">template-driven</a></button>
+</div>
+
+<!-- In questo tag sono renderizzati i Components corrispondenti alle varie rotte definite nel "app-module.ts" -->
+<router-outlet></router-outlet>
+
+<!--
+<hr>
+<app-parent-component></app-parent-component>
+<hr>
+<hr>
+<app-example-component></app-example-component>
+<hr>
+<app-direttive-component></app-direttive-component>
+<hr>
+<app-pipe-component></app-pipe-component>
+-->

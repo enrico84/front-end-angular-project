@@ -1,0 +1,47 @@
+<!-- 
+    Il template è codice HTML che contiene sintassi del modello Angular che modifica l'HTML
+    in base la logica dell'app e lo stato dei dati
+    Il template può utilizzare il DATA BINDING per coordinare l'app ed i dati del DOM 
+    le DIRETTIVE per applicare la logica dell'app a ciò che viene visualizzato,
+    le PIPE per trasformare i dati prima che vengano visualizzati
+-->
+<h1>{{title}}</h1>
+
+<h2>Expressioni</h2>
+<hr class="myHR">
+
+<!-- INTERPOLAZIONE -->
+<h3>Interpolazione</h3>
+
+<p>{{sesso === 'M' ? 'Uomo': 'Donna'}}</p>
+
+<!-- Interpolazione URL Immagine -->
+<img [height] = "imgHeight" src={{myImgUrl}}>
+
+<!--  Interpolazione di un' espressione complessa -->
+<p>1 + 1 + {{myNum}} = {{ 1 + 1 + myVal() }}</p>
+<hr class="myHR">
+
+<!-- PROPERTY BINDING: Forma alternativa all'interpolazione ma dal risultato identico -->
+<h3>Property Binding</h3>
+<!-- Utilizza una proprietà del tag HTML -->
+<p>3 * 3 = <span [innerHtml] = "myNum * myVal()"></span></p>
+<!-- Forma alternativa che utilizza bind-nomeProprietà -->
+<p> 3 * 3 = <span bind-innerHtml = "myNum * myVal()"></span> </p>
+
+<hr class="myHR">
+
+<!-- Catturare eventi del mouse e tastiera -->
+<h5 (click)="clickHandler($event)">Clicca su questa frase per catturare l'evento del Mouse</h5>
+<label>Premi il tasto <b>Enter</b> per stampare sulla console</label>&nbsp;
+<input (keydown.enter)="inputHandler($event)" type="text">
+
+<hr class="myHR">
+
+<!-- 
+    TWO-WAY DATA BINDING grazie alla direttiva [(ngModel)] (effettua il binding tra template e classe) 
+    utilizzabile SOLO con i moduli 
+-->
+<h3>Two way data binding</h3>
+<input type = "text" [(ngModel)] = "myModel" name="inputText" />
+<button (click) = "mostraModel();">Click</button>
