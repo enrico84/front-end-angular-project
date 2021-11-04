@@ -1,8 +1,4 @@
-<mat-spinner *ngIf=!users?.length></mat-spinner>
-
-<button mat-icon-button *ngIf=users?.length (click)=upsertHandler()>
-  Add <mat-icon>+</mat-icon>
-</button>
+<mat-spinner *ngIf="!users?.length"></mat-spinner>
 
 <ng-container *ngFor="let user of users">
   <mat-list>
@@ -17,7 +13,7 @@
           <mat-icon>delete</mat-icon>
           <span>Delete</span>
         </button>
-        <button mat-menu-item (click)="editHandler(user)">
+        <button mat-menu-item (click)="upsertHandler(user)">
           <mat-icon>edit</mat-icon>
           <span>Edit</span>
         </button>
@@ -27,6 +23,15 @@
     <mat-divider></mat-divider>
   </mat-list>
 </ng-container>
+
+<button mat-fab 
+        color="primary" 
+        matTooltip="Add a new user"
+        *ngIf="users?.length" 
+        (click)="upsertHandler()">
+  <mat-icon>add</mat-icon>
+</button>
+
 
 
 <!--

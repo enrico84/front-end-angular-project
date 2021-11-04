@@ -77,7 +77,7 @@ export class AppComponent {
     .pipe(
       filter(id => !!id), // CONTROLLO SE L'ID ESISTE
       delay(1000),
-      switchMap(id =>  this.http.delete(`${URL}/${id}`)) // l'ID CHE PRENDO LO USO NELLA DELETE
+      switchMap(id =>  this.http.delete(`${URL}/${id}`)) // L'ID CHE PRENDO LO USO NELLA DELETE
     )
     .subscribe(() => {
       if(this.users) {
@@ -95,7 +95,7 @@ export class AppComponent {
       console.log('qui formData!', formData);
       if(formData) {
         if(user?.id) {
-          this.editHandler({...user, ...formData}); // MERGE DEI DATI
+          this.editHandler({...user, ...formData}); // ... MERGE DEI DATI TRA TUTTO USER + I DATI DEL FORM
         } else {
           this.addHandler({...user, ...formData});
         }
@@ -113,9 +113,14 @@ export class AppComponent {
     });
   }
     
-
+  // ADD DI UN USER
   addHandler(user: User): void {
-    // TODO
+    this.http.post<User>(`${URL}`, user)
+    .subscribe((response) => {
+      if(this.users) {
+        this.users = [...this.users, response];  // APPEND DELLA RESPONSE DELLA POST(IL NUOVO USER) ALL'ARRAY CON ...
+      }
+    });
   }
    
 

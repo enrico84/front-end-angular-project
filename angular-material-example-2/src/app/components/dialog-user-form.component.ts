@@ -7,18 +7,29 @@ import { User } from '../model/user';
 @Component({
     selector: 'dialog-user-form',
     template: `
-        <div mat-dialog-content *ngIf="user">
+        <div mat-dialog-content>
           <p>Edit {{user?.name}}, are you sure ?</p>
+          
           <form #f="ngForm" (submit)="confirmHandler(f)">
+
             <mat-form-field appearance="fill">
               <mat-label>User name</mat-label>
-              <input matInput [ngModel]="user.name" name="name">
+              <input matInput 
+                  [ngModel]="user?.name" 
+                  name="name" 
+                  required 
+                  minlength="3">
+              <mat-error>
+                Required at least 3 characters
+              </mat-error>
             </mat-form-field>
+            
             <div mat-dialog-actions>
               <button mat-button mat-dialog-close>No Thanks</button>
-              <button mat-button type="submit" cdkFocusInitial>Confirm</button>
+              <button mat-button type="submit" cdkFocusInitial [disabled]="f.invalid">Confirm</button>
             </div>
-          </form>
+          
+            </form>
         </div>
         
     `,
@@ -32,7 +43,7 @@ import { User } from '../model/user';
       }
 
       /* CHIUDO LA FINESTRA DI DIALOG APERTA E SCATENA 
-         L'EVENTO "editHandler.dialogRef.afterClosed()" DICHIARATO IN "app.component.ts" 
+         L'EVENTO "upsertHandler.dialogRef.afterClosed()" DICHIARATO IN "app.component.ts" 
       */ 
       confirmHandler(f: NgForm): void{
         console.log("confirmHandler: ", f.value);
