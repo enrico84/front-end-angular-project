@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { User } from './model/user';
 import {delay} from 'rxjs/operators';
 import { MatButton } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const URL = 'https://jsonplaceholder.typicode.com/users';
 
@@ -34,7 +35,8 @@ export class AppComponent {
   users: User[] | null = null;  // ANGULAR-12 - *STRICT-MODE => SPECIFICO CHE L'ARRAY PUO' ESSERE VUOTO O NULL 
 
   // CARICO GLI UTENTI CON 2 SECONDI DI RITARDO
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, 
+              private snackBar: MatSnackBar) {
     http.get<User[]>(URL)
     .pipe(delay(2000))
     .subscribe(
@@ -53,6 +55,7 @@ export class AppComponent {
       () => {
         if(this.users) {
           this.users = this.users.filter(user => user.id !== id);
+          this.snackBar.open('Deleted user', 'SUCCESS');
         }
       },
       () => (btnRef.disabled = false)

@@ -33,9 +33,14 @@
   ],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
+    "enableI18nLegacyMessageIdFormat": true,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true,
-    "enableIvy": true
+    "strictTemplates": false,
+    "enableIvy": true,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "noImplicitAny": false,
+    "strictFunctionTypes": false
   }
 }
